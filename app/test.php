@@ -60,7 +60,6 @@ use Aws\DynamoDb\DynamoDbClient;
       if(xmlHttp.status==200 && xmlHttp.readyState == 4){
         rsp = xmlHttp.responseText;
         response = JSON.parse(rsp);
-        alert(response['username']);
 
         // var new_url = "generaterecipes.php";
 
