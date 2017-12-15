@@ -92,8 +92,12 @@ use Aws\DynamoDb\DynamoDbClient;
               echo '<br>_______________________________________________________<br>';
 
               if(count($stack) > 0){
-                echo 'Your fridge has '.count($stack).' items!';
-
+                echo 'Your fridge has '.count($stack).' items!<br><br>';
+                echo 'Please enter your number to deliver your fridge contents to your phone';
+                echo "<form name='form' method='post' action='test.php'>";
+                echo "<input type='text' name='form_number'/></label><br>";
+                echo "<input type='submit' alt='Submit' src='submit.png' name='newuser_submit' width='80' height='80'>";
+                echo "</form>";
               }
 
                 else{
@@ -102,12 +106,11 @@ use Aws\DynamoDb\DynamoDbClient;
 
                 // echo 'Your fridge contains '.($count-1).' items! <br><br>';
                 echo '<br><br><a href="fridge_add.php"><button>*  add  *</button></a>';
-                echo '<a href="fridge_delete.php"><button>*  delete  *</button></a><br>';
+                echo '<a href="fridge_delete.php"><button>*  delete  *</button></a>';
                 echo '<a href="recipes.php"><button>*  find recipes  *</button></a>';
                 
               }  
         ?>
-      </p>
     </div>
   </body>
 </html>

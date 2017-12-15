@@ -9,9 +9,11 @@
 </head>
 
 <body>
-  <?php include('../includes/navbar.php'); ?>
+  <?php include('navbar.php'); 
+  $input = $_POST['locationtag'];
+  ?>
   <div align="center"class="container">
-    <p align="center">RESTAURANT            BY        LOCATION</p>
+    <p align="center">T    W    E    E    T             BY        LOCATION</p>
     <div align="center"id="googleMap" style="width:90%;height:600px;"></div>
     <script type="text/javascript" >
     function myMap() {
@@ -38,6 +40,13 @@
         });
 
       var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+      var dragmarker = new google.maps.Marker({
+        draggable: true,
+        position: requestedlatlngset,
+        map: map,
+        draggable : true,
+        title: "Your location"
+      });
       <?php
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -65,32 +74,23 @@
       ?>
       
       // var infomarker, i
-      var dragmarker = new google.maps.Marker({
-        draggable: true,
-        position: requestedlatlngset,
-        map: map,
-        icon: "http://maps.google.com/mapfiles/kml/paddle/red-stars.png",
-        draggable : true,
-        title: "Your location"
-      });
-
       for (var i =0; i < locations.length; i++) {
             var name = locations[i][2];
             var url = locations[i][3];
 
         existinglatlong = new google.maps.LatLng(locations[i][0], locations[i][1]);
 
-        // if ((google.maps.geometry.spherical.computeDistanceBetween(requestedlatlngset,existinglatlong)) <= 5) {
+        // if ((google.maps.geometry.spherical.computeDistanceBetween(requestedlatlngset,existinglatlong)) <= 10) {
 
         var infomarker = new google.maps.Marker({  
           map: map, 
           title: "loan", 
-          icon: "http://maps.google.com/mapfiles/kml/pal2/icon55.png",
-          position: existinglatlong  
+          icon: iconBase + "info-i_maps.png",
+          position: latlngset  
           });
         map.setCenter(infomarker.getPosition())
-        var content = "<u>Name:</u>" + name + "<br/><u>URL :</u>'<a href='" + url + "'>" + url 
-+"';'";        var infowindow = new google.maps.InfoWindow()
+        var content = "<u>Name:</u>" + name + "<br/><u>URL :</u>" + url
+        var infowindow = new google.maps.InfoWindow()
 
         google.maps.event.addListener(infomarker,'click', (function(infomarker,content,infowindow){ 
           return function() {
@@ -99,9 +99,7 @@
           };
         }) (infomarker,content,infowindow)); 
         gmarkers.push(infomarker);
-      // }
-    }
-    
+      }
 }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-nsMPz4dIJ4lHSr8GB3pwK2KlUt51VVE&callback=myMap&libraries=geometry"></script>

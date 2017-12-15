@@ -60,12 +60,14 @@ use Aws\DynamoDb\DynamoDbClient;
       echo "Following are the recipes generated based on your fridge <br><i>click on the title to select the recipe and write a review</i><br><br>";
       for ($i=0; $i<$size; $i++){
         $id = $main[$i]['id'];
+        $cooking_time = $main[$i]['totalTime'];
         $tagged_url = "http://www.yummly.co/recipes/".$id;
         echo "<a href='selectrecipe.php?id=".$id."&url=".$main[$i]['smallImageUrls'][0]."'>".$main[$i]['recipeName']." </a><br> <i>rated ".$main[$i]['rating']." stars on 5</i><br>";
 
         echo "<img src ='".$main[$i]['smallImageUrls'][0]."' width=300 height=200><br>";
         $tagged_url = "http://www.yummly.co/recipes/".$id;
-        echo "<a href ='".$tagged_url. "'>Click here for URL to entire recipe </a><br>";
+        echo "Total Time :".$cooking_time;
+        echo "<a href ='".$tagged_url. "'>Click here for Recipe</a><br>";
         echo "Ingredients: ";
         $count = count($main[$i]['ingredients']);
         $count = $count - 1;
