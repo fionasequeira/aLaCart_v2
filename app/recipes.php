@@ -15,7 +15,6 @@ use Aws\DynamoDb\DynamoDbClient;
     session_destroy();
     header('Location: '.'login.php');
   }
-  echo $_SESSION['EmailID'];
 
   $dynamoDbClient = DynamoDbClient::factory(array(
     'credentials' => array(
@@ -34,7 +33,7 @@ use Aws\DynamoDb\DynamoDbClient;
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <title>aLaCart: WELCOME</title>
+    <title>aLaCart: Generating recipe</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="home.css">

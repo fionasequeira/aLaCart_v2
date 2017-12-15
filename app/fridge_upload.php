@@ -43,7 +43,7 @@ $s3Client = S3Client::factory(array(
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <title> SNAP IT</title>
+    <title> aLaCart: SNAP to Fridge</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="home.css">

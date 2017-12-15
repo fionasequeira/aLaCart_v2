@@ -43,7 +43,7 @@ $s3Client = S3Client::factory(array(
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <title>Shuttershots: SNAP IT</title>
+    <title>aLaCart: Share with us</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="home.css">
@@ -110,7 +110,7 @@ $s3Client = S3Client::factory(array(
                 // if everything is ok, try to upload file
                 } else {
 
-                    $imageid = random_int(0,1000)+random_int(2000,3000);
+                    $imageid = time();
                     $result = $s3Client->putObject(array(
                         'Bucket' => 'linefeed-images',
                         'Key'    => $imageid,
@@ -120,7 +120,6 @@ $s3Client = S3Client::factory(array(
                     ));
 
                     $url = $result['ObjectURL'];
-                    echo $url;
                     $email = $_SESSION['EmailID'];
                     $date= $_POST['Date'];
                     $rating =$_POST['Rating'];

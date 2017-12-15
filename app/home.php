@@ -38,6 +38,7 @@ use Aws\DynamoDb\DynamoDbClient;
 </head>
 
 <body>
+  <?php include('../includes/navbar.php'); ?>
     <div class= "container" align= "center" float="center">
       <p align = "center", float= "center">
         <?php
@@ -60,12 +61,12 @@ use Aws\DynamoDb\DynamoDbClient;
               foreach ($iterator as $item) {
                   // Grab the time number value
                   echo "This recipe got a rating of:   ". $item['rating']['S'] . " on 10 stars</b><br>";
-                  echo "<b><u>Snapshot</u>:   <img src='". $item['url']['S'] ."' width='300' height='200'></b><br>";
-                  echo "Description:".$item['description']['S']."<br>";
-                  echo "<i> Added on  ". $item['date']['S']." </i> and submitted by  ". $item['email']['S']."<br>";
-                  echo "<br><br>________________________________________<br><br>";
-                  }          
+                  echo "<img src='". $item['url']['S'] ."' width='600' height='400'></b><br>";
+                  echo $item['description']['S']."<br>";
+                  echo "<i>submitted by  ". $item['email']['S']." on ".$item['date']['S']."<br>";
+                  echo "<br><br>________________________________________<br><br>";         
             }
+          }
         ?>
 
       </p>

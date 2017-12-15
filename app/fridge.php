@@ -31,7 +31,7 @@ use Aws\DynamoDb\DynamoDbClient;
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <title>aLaCart: LiveFeed</title>
+    <title>aLaCart: Fridge</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="home.css">
@@ -45,7 +45,7 @@ use Aws\DynamoDb\DynamoDbClient;
          <?php
             if(isset($_SESSION['EmailID'])){
 
-              echo 'Recommendations for our top rated recipes you may like<br><br>';
+              echo 'Recommendations for our top rated recipes you may like<br>';
                  $iterator = $dynamoDbClient->getIterator('Scan', array(
                     'TableName'     => 'multimedia'
                 ));
@@ -54,14 +54,15 @@ use Aws\DynamoDb\DynamoDbClient;
                   // Grab the time number value
                 $rating = $item['rating']['S'];
                 if((trim($rating)=='8')||(trim($rating)=='9')||(trim($rating)=='10')){
-                  echo "<button> This recipe got a rating of:   ". $rating . " on 10 stars</b><br>";
-                  echo "<b><u>Snapshot</u>:   <img src='". $item['url']['S'] ."' width='300' height='200'></b><br>";
-                  echo "Description:".$item['description']['S']."</button>";
+                  echo "<button><a href='home.php'> This recipe got a rating of:   ". $rating . " on 10 stars<br>";
+                  echo "<b> <img src='". $item['url']['S'] ."' width='150' height='100'></b><br>";
+                  echo $item['description']['S']."<br></a></button>";
                                     }
                                     } 
-            echo '<br><br>Welcome back!! Put on the chefs hat <br>';
-            echo '<br><img float="center" align="center" src="chef.gif" width="300" height="300"><br>';
-            echo '<br>';         
+            echo '<img float="center" align="center" src="chef.gif" width="300" height="300">';
+                echo '<br>Welcome back!! Lets check out your FRIDGE! <br>';
+                echo '<br>';
+                echo '_______________________________________________________<br><br>';         
 
               $email = $_SESSION['EmailID'];
               $iterator = $dynamoDbClient->getIterator('Scan', array(
@@ -80,22 +81,23 @@ use Aws\DynamoDb\DynamoDbClient;
               $stack = array();
               foreach ($iterator as $item) {
                   // Grab the time number value
-                  echo "<b><u>Item</u>:   ". $item['item']['S'] . "</b>\n";
-                  echo "<i> Added on:   ". $item['date']['S'].' </i><br>';
+                  echo "<b><u>".strtoupper($item['item']['S']) . "</u></b>";
+                  echo "<i>   on:   ". $item['date']['S'].' </i><br>';
                   $fridgeitem = $item['item']['S'] . "\n";
                   array_push($stack, $fridgeitem);
                   // Grab the error string value
               }
 
               $_SESSION['fridge']=$stack;
+              echo '<br>_______________________________________________________<br>';
 
               if(count($stack) > 0){
-                echo '<br><br>Your fridge has '.count($stack).' items! <br><br>';
+                echo 'Your fridge has '.count($stack).' items!';
 
               }
 
                 else{
-                  echo 'Your fridge is empty! <br><br>';
+                  echo 'Your fridge is empty! ';
                 }
 
                 // echo 'Your fridge contains '.($count-1).' items! <br><br>';

@@ -36,12 +36,8 @@ use Aws\DynamoDb\DynamoDbClient;
       <p align = "center", float= "center">
         <?php
             echo 'WELCOME to the aLaCart photo gallery! <br>';
-            echo '<br>';
-            echo '<br>';
             echo '<br><br><br> Below you will find updates from our network.<br><br>';
             echo 'Like what you see? <button><a href="newuser.php" class="button">  Sign UP here! </a></button>';
-
-              echo '<br><br><br> Below you will find updates from our network <br><br>';
               echo '<br>';
               echo '<br>';
               $iterator = $dynamoDbClient->getIterator('Scan', array(
@@ -51,9 +47,9 @@ use Aws\DynamoDb\DynamoDbClient;
               foreach ($iterator as $item) {
                   // Grab the time number value
                   echo "This recipe got a rating of:   ". $item['rating']['S'] . " on 10 stars</b><br>";
-                  echo "<b><u>Snapshot</u>:   <img src='". $item['url']['S'] ."' width='300' height='200'></b><br>";
-                  echo "Description:".$item['description']['S']."<br>";
-                  echo "<i> Added on  ". $item['date']['S']." </i> and submitted by  ". $item['email']['S']."<br>";
+                  echo "<img src='". $item['url']['S'] ."' width='600' height='400'></b><br>";
+                  echo $item['description']['S']."<br>";
+                  echo "<i>submitted by  ". $item['email']['S']." on ".$item['date']['S']."<br>";
                   echo "<br><br>________________________________________<br><br>";         
             }
         ?>

@@ -31,7 +31,7 @@ use Aws\DynamoDb\DynamoDbClient;
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <title>aLaCart: SNAP IT</title>
+    <title>aLaCart: SNAP to Fridge</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="home.css">
@@ -47,10 +47,10 @@ use Aws\DynamoDb\DynamoDbClient;
               $fridgeitems = $_SESSION["fridge"];
               $date =$_POST['date'];
               $email = $_SESSION['EmailID'];
-              $id = random_int(0,1000) + random_int(0,1000);
+              $id = time();
               $count = count($fridgeitems);
               $flag =0;
-              $date = "Image";
+              $date = time();
 
               while($count!=0){
                 if (trim(strtolower($main_item)) == trim(strtolower($fridgeitems[$count-1]))) {
@@ -67,7 +67,7 @@ use Aws\DynamoDb\DynamoDbClient;
                     'email_id'   => array('S' => $email),
                     'id' => array('N' => (string)$id),
                     'item' => array('S' => $main_item),
-                    'date' => array('S'=> $date),
+                    'date' => array('S'=> (string)$date),
                   )
           ));
 
@@ -96,8 +96,8 @@ use Aws\DynamoDb\DynamoDbClient;
               $_SESSION['fridge']=$stack;
 
               echo "<p align='center' float='center'>".$main_item." has been successfully added! <br>Add more items via your current image by clicking the + button or Upload a new image via camera <br><i> Click on the Fridge Icon on the navigation bar to view updates </i>";
-              echo '<br><br><a href="fridge_image.php"><img src="add.png" width="100" height="80"></a>';
-              echo '<a href="fridge_upload.php"><img src="flash.gif" width="100" height="80"><br>';
+              echo '<br><br><a href="fridge_image.php"><img src="add.png" width="60" height="60"></a><br>';
+              echo '<a href="fridge_upload.php"><img src="flash.gif" width="300" height="200"><br>';
               echo '<br><br></p>';
 
               }

@@ -31,7 +31,7 @@ use Aws\DynamoDb\DynamoDbClient;
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <title>Shuttershots: SNAP IT</title>
+    <title>aLaCart: Update Fridge</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="home.css">
@@ -61,7 +61,7 @@ use Aws\DynamoDb\DynamoDbClient;
               $item= $_POST['name'];
               $date =$_POST['date'];
               $email = $_SESSION['EmailID'];
-              $id = random_int(0,100) + random_int(0,100);
+              $id = time();
 
               $fridgeitems = $_SESSION["fridge"];
               $count = count($fridgeitems);

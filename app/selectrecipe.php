@@ -35,6 +35,7 @@ $s3Client = S3Client::factory(array(
    'version' => 'latest',
 ));
 
+if(!isset($_POST["submitbutton"])){
 $email =$_SESSION['EmailID'];
 $id = $_GET['id'];
 $recipeurl = $_GET['url'];
@@ -49,6 +50,7 @@ $result3 = $dynamoDbClient->putItem(array(
                         'email_id' => array('S'=> $email),
                         )
                     ));
+}
 
 ?>
 
@@ -57,7 +59,7 @@ $result3 = $dynamoDbClient->putItem(array(
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <title>Review: SNAP IT</title>
+    <title>aLaCart: Recipe Feedback</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="home.css">
@@ -69,10 +71,10 @@ $result3 = $dynamoDbClient->putItem(array(
     <div class="container">
    
 
-        <form action="selectrecipe.php?" method="post" enctype="multipart/form-data">
+        <form action="selectrecipe.php" method="post" enctype="multipart/form-data">
         <br>
-        <p align="center">     <b><u>Share your RATING and a SNAP today!</b></u>    
-            <br> <br> Select image to upload:<br>
+        <p align="center">     <b>Did you try preparing the meal you just clicked?! Share it with aLaCart</u>    
+            <br> Your rating is important to us <br>
         <input type="image" src ="star.png" class="description" name="Rating" placeholder="Enter a score" width ="70" height ="70"/>
         How do you rate your dish? Enter a score from 0-10:
         <input type="text" class="description" name="Rating" width ="100" height ="100"/>
@@ -125,7 +127,7 @@ $result3 = $dynamoDbClient->putItem(array(
                 // if everything is ok, try to upload file
                 } else {
 
-                    $imageid = random_int(0,1000)+random_int(2000,3000);
+                    $imageid = time();
                     $result = $s3Client->putObject(array(
                         'Bucket' => 'linefeed-images',
                         'Key'    => $imageid,
@@ -135,7 +137,6 @@ $result3 = $dynamoDbClient->putItem(array(
                     ));
 
                     $url = $result['ObjectURL'];
-                    echo $url;
                     $email = $_SESSION['EmailID'];
                     $date= $_POST['Date'];
                     $rating =$_POST['Rating'];
@@ -152,11 +153,9 @@ $result3 = $dynamoDbClient->putItem(array(
                         'email' => array('S'=> $email),
                         )
                     ));
-                    $yes=1;
+
                     echo "<p>Your feed back is now live on the alacart community</p>";
-                    
-                    
-                }
+                    }
                 
             }
             else {

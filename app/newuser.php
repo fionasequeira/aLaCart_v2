@@ -27,7 +27,7 @@ use Aws\DynamoDb\DynamoDbClient;
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-    <title>aLaCart: Sign UP</title>
+    <title>aLaCart: Welcome New User</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="home.css">
